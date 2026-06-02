@@ -18,9 +18,9 @@ print(" -> seuls les impairs\n")
 
 # Exemple avec else sur une boucle
 print("\n=== Boucle avec else ===")
-nombre = 4
+nombre = 9
 
-for  i in range(2, nombre):
+for i in range(2, nombre):
     if nombre % i == 0:
         print(f"{nombre} n'est pas premier")
         break
