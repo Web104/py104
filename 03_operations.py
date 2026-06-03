@@ -20,4 +20,3 @@ print("Je m'appelle " + prenom + " " + nom)
 # Nouvelle façon moderne : f-strings (très importante)  en python 3.6+
 print(f"Je m'appelle {prenom} {nom}")
 print(f"J'ai {2026-2002} ans en 2026")
-

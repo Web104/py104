@@ -32,3 +32,4 @@ for fruit in fruits:
 # Vérification d'appartenance
 if "pomme" in fruits:
     print("\nLa pomme est dans la liste !")
+    

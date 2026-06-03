@@ -29,3 +29,4 @@ print("=== Nombres impairs entre 1 et 21 ===")
 for nombre in range(1, 21):
     if nombre % 2 == 1:
         print(nombre, end=" ")
+        

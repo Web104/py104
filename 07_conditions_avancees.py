@@ -37,3 +37,4 @@ if nbre % 2 == 0:
     print(f"{nbre} est un nombre pair.")
 else:
     print(f"{nbre} n'est pas pair.")
+    

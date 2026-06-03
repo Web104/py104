@@ -26,5 +26,3 @@ for i in range(2, nombre):
         break
 else:
     print(f"{nombre} est un nombre premier !")
-
-
