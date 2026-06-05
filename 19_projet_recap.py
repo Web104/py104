@@ -1,6 +1,35 @@
 # PROJET RECAPITULATIF
 
-contacts = []
+import json
+import os
+
+# Nom du fichhier de sauvegarde
+FICHIER_CONTACTS = "contacts.json"
+
+# Charger les contacts au démarrage
+def charger_contacts():
+    global contacts
+    if os.path.exists(FICHIER_CONTACTS):
+        try:
+            with open(FICHIER_CONTACTS, "r", encoding="utf-8") as f:
+                contacts = json.load(f)
+            print(f"✅ {len(contacts)} contacts chargés depuis le fichier.")
+        except:
+            print("⚠️ Erreur lors du chargement du fichier. Démarrage avec liste vide.")
+            contacts = []
+    else:
+        contacts = []
+
+# Sauvegarder les contacts
+def sauvegarder_contacts():
+    try:
+        with open(FICHIER_CONTACTS, 'w', encoding="utf-8") as f:
+            json.dump(contacts, f, ensure_ascii=False, indent=4)
+    except:
+        print("❌ Erreur lors de la sauvegarde.")
+
+
+charger_contacts()
 
 # Ajouter un contact
 def ajouter_contact():
@@ -23,6 +52,8 @@ def ajouter_contact():
     contacts.append(nouveau_contact)
 
     print(f"\nContact de {nom} ajouté avec succès !")
+
+    sauvegarder_contacts()
 
 # Afficher un contact
 def afficher_contact():
@@ -97,6 +128,8 @@ def modifier_contact():
             return
         
     print(f"\n❌ Aucun contact trouvé avec l'email : {email_recherche}")
+
+    sauvegarder_contacts()
     
 # Supprimer un contact
 def supprimer_contact():
@@ -126,6 +159,8 @@ def supprimer_contact():
             print("\nSuppression annulée")
         
     print(f"\n❌ Aucun contact trouvé avec l'email : {email_recherche}")
+
+    sauvegarder_contacts()
 
 # Menu principal
 while True:
