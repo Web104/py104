@@ -2,6 +2,7 @@
 
 contacts = []
 
+# Ajouter un contact
 def ajouter_contact():
     """Ajoute un nouveau contact dans la liste"""
     print("\n--- Ajout d'un nouveau contact")
@@ -23,6 +24,7 @@ def ajouter_contact():
 
     print(f"\nContact de {nom} ajouté avec succès !")
 
+# Afficher un contact
 def afficher_contact():
     """Afficher tous les contacts."""
     if not contacts:
@@ -33,6 +35,7 @@ def afficher_contact():
     for i, contact in enumerate(contacts, 1):
         print(f"{i}. {contact['nom']} - {contact['telephone']} - {contact['email']} - {contact['ville']}")
 
+# Rechercher un contact
 def rechercher_contact():
     """Recherche un contact par email"""
     
@@ -54,7 +57,48 @@ def rechercher_contact():
             break
     if not trouve:
         print(f"\n❌ Aucun contact trouvé avec l'email : {email_recherche}")
+
+# Modifier un contact
+def modifier_contact():
+    """Modifie les informations d'un contact existant"""
+
+    if not contacts:
+        print("\nAucun contact à modifier.")
+
+    email_recherche = input("\nEntrez l'email du contact modifier :").strip().lower()
+
+    for contact in contacts:
+        if contact["email"] == email_recherche:
+            print("\nContact trouvé. Quelles informations voulez-vous modifier ?")
+            print("1. Nom")
+            print("2. Téléphone")
+            print("3. Email")
+            print("4. Ville")
+            print("5. Tout annuler")
+
+            choix = input("\nVotre choix : ").strip()
+
+            if choix == "1":
+                contact["nom"] = input("Nouveau nom : ").strip().title()
+            elif choix == "2":
+                contact["telephone"] = input("Nouveau téléphone : ").strip().title()
+            elif choix == "3":
+                contact["email"] = input("Nouveau email : ").strip().title()
+            elif choix == "4":
+                contact["ville"] = input("Nouvelle ville : ").strip().title()
+            elif choix == "5":
+                print("Modification annulée")
+                return
+            else:
+                print("Choix invalide.")
+                return
+            
+            print(f"\n✅ Contact de {contact['nom']} modifié avec succès !")
+            return
+        
+    print(f"\n❌ Aucun contact trouvé avec l'email : {email_recherche}")
     
+# Supprimer un contact
 def supprimer_contact():
     """Supprime un contact par email"""
     if not contacts:
@@ -84,19 +128,19 @@ def supprimer_contact():
     print(f"\n❌ Aucun contact trouvé avec l'email : {email_recherche}")
 
 # Menu principal
-
 while True:
-    print("\n" + "="*40)
+    print("\n" + "="*45)
     print("\n    GESTIONNAIRE DE CONTACTS")
-    print("="*40)
+    print("="*45)
     print("1. Ajouter un contact")
     print("2. Afficher tous les contacts")
     print("3. Rechercher un contact")
-    print("4. Supprimer un contact")
-    print("5. Quitter")
-    print("="*40)
+    print("4. Modifier un contact")
+    print("5. Supprimer un contact")
+    print("6. Quitter")
+    print("="*45)
 
-    choix = input("Votre choix : ").strip()
+    choix = input("\nVotre choix : ").strip()
 
     if choix == "1":
         ajouter_contact()
@@ -105,8 +149,10 @@ while True:
     elif choix == "3":
         rechercher_contact()
     elif choix == "4":
-        supprimer_contact()
+        modifier_contact()
     elif choix == "5":
+        supprimer_contact()
+    elif choix == "6":
         print("\n👋 Au revoir ! À bientôt.")
         break
     else:
