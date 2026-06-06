@@ -1,7 +1,10 @@
 # PROJET RECAPITULATIF
 
+from colorama import init, Fore, Back, Style
 import json
 import os
+
+init(autoreset=True)
 
 # Nom du fichhier de sauvegarde
 FICHIER_CONTACTS = "contacts.json"
@@ -68,26 +71,31 @@ def afficher_contact():
 
 # Rechercher un contact
 def rechercher_contact():
-    """Recherche un contact par email"""
-    
-    email_recherche = input("\nEntrez l'email du contact à rechercher :").strip().lower()
-
+    """Recherche un contact par un nom ou par email"""
     if not contacts:
         print("\nAucun contact enregistré.")
         return
+    
+    recherche = input("\nEntrer le nom ou l'email à rechercher : ").strip()
 
     trouve = False
+
     for contact in contacts:
-        if contact['email'] == email_recherche:
-            print("\n✅ Contact trouvé !")
-            print(f"Nom       : {contact['nom']}")
-            print(f"Téléphone : {contact['telephone']}")
-            print(f"Email     : {contact['email']}")
-            print(f"Ville     : {contact['ville']}")
-            trouve = True
-            break
+        # Recherche insensible à la casse.
+        if(recherche.lower in contact['nom'].lower()) or recherche.lower() == contact['email'].lower():
+           print("\n" +"="*40)
+           print("✅ CONTACT TROUVE")
+           print("="*40)
+           print(f"Nom          : {contact['nom']}")
+           print(f"Téléphone    : {contact['telephone']}")
+           print(f"Email        : {contact['email']}")
+           print(f"Ville        : {contact['ville']}")
+           print("="*40)
+           trouve = True
+           # On continue la boucle pour afficher tous les résultats possibles
+
     if not trouve:
-        print(f"\n❌ Aucun contact trouvé avec l'email : {email_recherche}")
+        print(f"\n❌ Aucun contact trouvé avec {recherche}")
 
 # Modifier un contact
 def modifier_contact():
@@ -164,18 +172,18 @@ def supprimer_contact():
 
 # Menu principal
 while True:
-    print("\n" + "="*45)
-    print("\n    GESTIONNAIRE DE CONTACTS")
-    print("="*45)
-    print("1. Ajouter un contact")
-    print("2. Afficher tous les contacts")
-    print("3. Rechercher un contact")
-    print("4. Modifier un contact")
-    print("5. Supprimer un contact")
-    print("6. Quitter")
-    print("="*45)
+    print("\n" + "="*50)
+    print(Fore.CYAN + "\n    GESTIONNAIRE DE CONTACTS"  + Style.RESET_ALL)
+    print("="*50)
+    print(Fore.YELLOW + "1. Ajouter un contact")
+    print(Fore.YELLOW + "2. Afficher tous les contacts")
+    print(Fore.YELLOW + "3. Rechercher un contact")
+    print(Fore.YELLOW + "4. Modifier un contact")
+    print(Fore.YELLOW + "5. Supprimer un contact")
+    print(Fore.YELLOW + "6. Quitter")
+    print("="*50)
 
-    choix = input("\nVotre choix : ").strip()
+    choix = input(Fore.WHITE + "\nVotre choix : "   + Style.RESET_ALL).strip()
 
     if choix == "1":
         ajouter_contact()
@@ -188,7 +196,8 @@ while True:
     elif choix == "5":
         supprimer_contact()
     elif choix == "6":
-        print("\n👋 Au revoir ! À bientôt.")
+        print(Fore.GREEN + "\n👋 Au revoir ! À bientôt." + Style.RESET_ALL)
+        sauvegarder_contacts()
         break
     else:
-        print("\n❌Choix invalide. Veuillez réessayer....")
+        print(Fore.RED  + "\n❌ Choix invalide. Veuillez réessayer." + Style.RESET_ALL)
