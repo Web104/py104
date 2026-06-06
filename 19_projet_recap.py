@@ -1,6 +1,7 @@
 # PROJET RECAPITULATIF
 
 from colorama import init, Fore, Back, Style
+import contact_utils
 import json
 import os
 
@@ -40,7 +41,7 @@ def ajouter_contact():
     print("\n--- Ajout d'un nouveau contact")
 
     nom = input("Entrez le nom :").strip().title()
-    telephone = input("Entrez le Téléphone :").strip()
+    telephone = contact_utils.formater_telephone(input("Entrez le Téléphone :").strip())
     email = input("Entrez l'email : ").strip().lower()
     ville = input("Entrez la ville :").strip().title()
 
