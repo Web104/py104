@@ -14,3 +14,11 @@ def formater_telephone(telephone):
 #     """Génère un identifiant unique simple"""
 #     annee = datetime.now().year
 #     return f"CONT-{annee}-{len(contacts) + 1:03d}"
+
+# Ce code s'exécute uniquement si on lance le fichier directement.
+if __name__ == "__main__":
+    print("=== Test du module contact_utils ===")
+    print(formater_telephone("0145744747"))
+    print(formater_telephone("0123456789"))
+
+    
