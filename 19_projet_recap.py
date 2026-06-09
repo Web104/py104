@@ -1,7 +1,9 @@
 # PROJET RECAPITULATIF
 
 from colorama import init, Fore, Back, Style
-import contact_utils
+from utils.formatage import formater_telephone, formater_nom
+from utils.validation import is_valide_email, is_valide_telephone
+# import contact_utils
 import json
 import os
 
@@ -40,9 +42,9 @@ def ajouter_contact():
     """Ajoute un nouveau contact dans la liste"""
     print("\n--- Ajout d'un nouveau contact")
 
-    nom = input("Entrez le nom :").strip().title()
-    telephone = contact_utils.formater_telephone(input("Entrez le Téléphone :").strip())
-    email = input("Entrez l'email : ").strip().lower()
+    nom = formater_nom(input("Entrez le nom :"))
+    telephone = formater_telephone(input("Entrez le Téléphone :"))
+    email = is_valide_email(input("Entrez l'email : ")).lower()
     ville = input("Entrez la ville :").strip().title()
 
     # Création d'un dictionnaire pour le contact
